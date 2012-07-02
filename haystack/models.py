@@ -73,7 +73,7 @@ class SearchResult(object):
                 try:
                     self._object = self.searchindex.read_queryset().get(pk=self.pk)
                 except NotHandled:
-                    self.log.warning("Model '%s.%s' not handled by the routers.", self.app_label, self.model_name)
+                    #self.log.warning("Model '%s.%s' not handled by the routers.", self.app_label, self.model_name)
                     # Revert to old behaviour
                     self._object = self.model._default_manager.get(pk=self.pk)
             except ObjectDoesNotExist:
