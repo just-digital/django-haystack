@@ -149,6 +149,10 @@ class SolrSearchBackend(BaseSearchBackend):
 
             kwargs['fl'] = fields
 
+        if kwargs['fl'] == "* score":
+            # Save bandwidth
+            kwargs['fl'] = 'id django_ct django_id score'
+
         if sort_by is not None:
             if sort_by in ['distance asc', 'distance desc'] and distance_point:
                 # Do the geo-enabled sort.
@@ -614,7 +618,7 @@ class SolrSearchQuery(BaseSearchQuery):
         search_kwargs = {
             'start_offset': self.start_offset,
             'result_class': self.result_class
-        }        
+        }
         order_by_list = None
 
         if self.order_by:
@@ -666,7 +670,7 @@ class SolrSearchQuery(BaseSearchQuery):
             search_kwargs['spelling_query'] = spelling_query
 
         return search_kwargs
-        
+
     def run(self, spelling_query=None, **kwargs):
         """Builds and executes the query. Returns a list of search results."""
         final_query = self.build_query()
