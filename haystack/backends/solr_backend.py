@@ -151,7 +151,7 @@ class SolrSearchBackend(BaseSearchBackend):
 
         if kwargs['fl'] == "* score":
             # Save bandwidth
-            kwargs['fl'] = 'id django_ct django_id score'
+            kwargs['fl'] = 'id django_ct django_id location_point point score'
 
         if sort_by is not None:
             if sort_by in ['distance asc', 'distance desc'] and distance_point:
