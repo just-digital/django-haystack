@@ -354,6 +354,8 @@ class SolrSearchBackend(BaseSearchBackend):
                     # For some reason, it's an array of pairs. Pull off the
                     # collated result from the end.
                     spelling_suggestion = raw_results.spellcheck.get('suggestions')[-1]
+                    # Store the raw spellcheck response
+                    self.raw_spelling = dict(raw_results.spellcheck)
 
         unified_index = connections[self.connection_alias].get_unified_index()
         indexed_models = unified_index.get_indexed_models()
